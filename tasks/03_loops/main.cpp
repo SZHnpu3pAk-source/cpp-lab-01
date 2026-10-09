@@ -1,4 +1,9 @@
 #include <iostream>
+#ifdef _WIN32
+#include <cstdio>
+#include <fcntl.h>
+#include <io.h>
+#endif
 
 // Прочитать n, затем n целых чисел.
 // Напечатать сумму, минимум, максимум и число строго положительных.
@@ -6,6 +11,9 @@
 // n в тестах всегда >= 0. При n == 0 чисел дальше нет.
 
 int main() {
+#ifdef _WIN32
+    _setmode(_fileno(stdout), _O_BINARY);
+#endif
     int n = 0;
     if (!(std::cin >> n)) {
         return 0;

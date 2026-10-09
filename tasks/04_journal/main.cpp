@@ -3,6 +3,11 @@
 #include <iomanip>
 #include <iostream>
 #include <string>
+#ifdef _WIN32
+#include <cstdio>
+#include <fcntl.h>
+#include <io.h>
+#endif
 
 // Каркас уже читает имя и число баллов и печатает отчёт.
 // Нужно дописать две проверки и тело цикла.
@@ -18,6 +23,9 @@
 // Отчёт в этих двух случаях печатать нельзя.
 
 int main() {
+#ifdef _WIN32
+    _setmode(_fileno(stdout), _O_BINARY);
+#endif
     std::string name;
     int n = 0;
     if (!(std::cin >> name >> n)) {
